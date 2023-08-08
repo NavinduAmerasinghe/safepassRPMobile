@@ -11,6 +11,7 @@ const Login = ({ navigation }) => {
     email: "dulnathamerasinghe@gmail.com",
     password: "Dulnath@123",
   });
+  const[baseUrl,setBaseUrl] = useState(process.env.BASE_URL);
   const { email, password } = values;
 
   const handleChange = (email) => (text) => {
@@ -66,7 +67,8 @@ const Login = ({ navigation }) => {
   // };
   const handleSubmit = async () => {
     // e.preventDefault();
-    const url = "http://192.168.8.223:8000/api/signin";
+    try {
+      const url = "http://192.168.1.6:8000/api/signin";
     const data = {
       email,
       password,
@@ -79,17 +81,23 @@ const Login = ({ navigation }) => {
       },
       body: JSON.stringify(data),
     });
-
     if (response.status === 200) {
       setValues({ email: "", password: "" });
       alert("Logged In");
-      navigation.navigate("HomeScreen");
+      //navigation.navigate("HomeScreen");
+      navigation.navigate("UserLocation");
     } else if (response.status === 401) {
       alert("Invalid email or password");
     } else {
       console.log(response.status);
     }
+    } catch (error) {
+      console.log(error);
+      alert(error);
+    }
+    
   };
+  
 
   return (
     <Background>

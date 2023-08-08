@@ -522,3 +522,20 @@ exports.getAnimalCountByDate = async (req, res) => {
     throw error;
   }
 };
+
+exports.getObservationsforLocation = async (req, res, next) => {
+
+  const {
+    lat,
+    long,
+  } = req.body;
+  console.log(lat,long);
+  try {
+    const observations = await WildlifeObservation.find();
+    console.log(observations);
+    res.send(observations)
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};

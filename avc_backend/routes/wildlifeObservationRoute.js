@@ -12,6 +12,7 @@ const {
   animalCountByParameters,
   mostSceanAnimalDayNightStat,
   getAnimalCountByDate,
+  getObservationsforLocation
 } = require("../controllers/wildlifeObservationController");
 
 // Multer storage configuration
@@ -50,5 +51,7 @@ router.get(
 
 // Get Animal Count By Date
 router.get("/observation/getAnimalCountByDate", getAnimalCountByDate);
+
+router.get("/observationsforLocation", getObservationsforLocation);
 
 module.exports = router;

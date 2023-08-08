@@ -22,6 +22,7 @@ exports.signup = async (req, res, next) => {
 };
 
 exports.signin = async (req, res, next) => {
+  console.log("hellooo");
   try {
     const { email, password } = req.body;
     if (!email || !password) {

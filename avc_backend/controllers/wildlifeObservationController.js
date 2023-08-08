@@ -529,13 +529,60 @@ exports.getObservationsforLocation = async (req, res, next) => {
     lat,
     long,
   } = req.body;
-  console.log(lat,long);
+
+  var id=null;
+  var dis;
+  const locations = []
   try {
-    const observations = await WildlifeObservation.find();
-    console.log(observations);
-    res.send(observations)
+    const observations = await WildlifeObservation.find();    
+
+    if(observations){
+    for(let i=0; i<observations.length; i++){
+      let newObservation = observations[i];
+      id = observations[i]._id
+      locations.push({"lat":observations[i].location.coordinates[0],"long":observations[i].location.coordinates[1]})
+      dis = distance(lat,long,locations[i].lat,locations[i].long,"K")
+      console.log(dis);
+      if(dis<6.0){
+        res.status(200).json({
+          "data":{newObservation},
+          "status":"Warning",
+          "message":"New location detected near you"
+        })
+      }
+    }
+    console.log(locations);
+    }
+    else{
+      res.status(400).json({
+        "data":{},
+        "status":"400",
+        "message":"Internal server error"
+      })
+    }
   } catch (error) {
     console.log(error);
-    next(error);
   }
 };
+
+function distance(lat1, lon1, lat2, lon2, unit){
+  if ((lat1 == lat2) && (lon1 == lon2)) {
+		return 0;
+	}
+	else {
+		var radlat1 = Math.PI * lat1/180;
+		var radlat2 = Math.PI * lat2/180;
+		var theta = lon1-lon2;
+		var radtheta = Math.PI * theta/180;
+		var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+		if (dist > 1) {
+			dist = 1;
+		}
+		dist = Math.acos(dist);
+		dist = dist * 180/Math.PI;
+		dist = dist * 60 * 1.1515;
+		if (unit=="K") { dist = dist * 1.609344 }
+		if (unit=="N") { dist = dist * 0.8684 }
+		return dist;
+	}
+}

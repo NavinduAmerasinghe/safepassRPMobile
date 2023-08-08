@@ -52,6 +52,6 @@ router.get(
 // Get Animal Count By Date
 router.get("/observation/getAnimalCountByDate", getAnimalCountByDate);
 
-router.get("/observationsforLocation", getObservationsforLocation);
+router.post("/observationsforLocation", getObservationsforLocation);
 
 module.exports = router;

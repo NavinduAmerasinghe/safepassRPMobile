@@ -1,15 +1,42 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import * as Location from 'expo-location';
 import * as TaskManager from 'expo-task-manager';
-import * as Permissions from 'expo-permissions';
-import * as BackgroundFetch from 'expo-background-fetch';
 
 const LOCATION_TRACKING = 'location-tracking';
 
 var l1;
 var l2;
-var locations=[];
+
+TaskManager.defineTask(LOCATION_TRACKING, async ({ data, error }) => {
+    if (error) {
+        console.log('LOCATION_TRACKING task ERROR:', error);
+        return;
+    }
+    if (data) {
+        const { locations } = data;
+        let lat = locations[0].coords.latitude;
+        let long = locations[0].coords.longitude;
+
+        l1 = lat;
+        l2 = long;
+
+        const result = await fetch("http://192.168.1.6:8000/api/observationsforLocation",
+            {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json",
+                },
+                body: JSON.stringify({lat,long}),
+            })
+            const resultData = await result.json();
+            console.log(resultData.message);
+
+        console.log(
+            `${new Date(Date.now()).toLocaleString()}: ${lat},${long}`
+        );
+    }
+});
 
 function UserLocation() {
 
@@ -18,7 +45,7 @@ function UserLocation() {
     const startLocationTracking = async () => {
         await Location.startLocationUpdatesAsync(LOCATION_TRACKING, {
             accuracy: Location.Accuracy.Highest,
-            timeInterval: 15,
+            timeInterval: 10000,
             distanceInterval: 0,
         });
         const hasStarted = await Location.hasStartedLocationUpdatesAsync(
@@ -30,21 +57,17 @@ function UserLocation() {
 
     React.useEffect(() => {
         const config = async () => {
-            await Permissions.askAsync(Permissions.LOCATION_BACKGROUND),async()=>{
-                let resf = await Location.requestForegroundPermissionsAsync();
-                let resb = await Location.requestBackgroundPermissionsAsync();
-                if (resf.status != 'granted' && resb.status !== 'granted') {
-                    console.log('Permission to access location was denied');
-                } else {
-                    console.log('Permission to access location granted');
-                }
-            };
-            
+            let resf = await Location.requestForegroundPermissionsAsync();
+            let resb = await Location.requestBackgroundPermissionsAsync();
+            if (resf.status != 'granted' && resb.status !== 'granted') {
+                console.log('Permission to access location was denied');
+            } else {
+                console.log('Permission to access location granted');
+            }
         };
 
         config();
     }, []);
-    
 
     const startLocation = () => {
       
@@ -87,57 +110,5 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
 });
-
-TaskManager.defineTask(LOCATION_TRACKING, async ({ data, error }) => {
-    if (error) {
-        console.log('LOCATION_TRACKING task ERROR:', error);
-        return;
-    }
-    if (data) { 
-        const { locations } = data;
-        let lat = locations[0].coords.latitude;
-        let long = locations[0].coords.longitude;
-
-        l1 = lat;
-        l2 = long;
-
-        console.log(
-            `${new Date(Date.now()).toLocaleString()}: ${lat},${long}`
-        );
-        
-        const data = {
-            lat,
-            long,
-          };
-    }
-});
-
-const fetchLocationData=async()=>{
-
-    const url = "http://192.168.1.6:8000/api/observationsforLocation";
-
-    try {
-        const response = await fetch(url, {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
-          if(response.status ===200){
-            console.log("success");
-            //console.log(response.observations[0].location.coordinates[0]);
-            
-            if(response.observations){
-                console.log(response);
-            }
-          }
-          else{
-            console.log(response.status);
-          }
-          //console.log(response);
-    } catch (error) {
-        console.log(error);
-    }
-}
 
 export default UserLocation;

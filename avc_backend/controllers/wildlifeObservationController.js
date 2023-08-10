@@ -544,7 +544,7 @@ exports.getObservationsforLocation = async (req, res, next) => {
       locations.push({"lat":observations[i].location.coordinates[0],"long":observations[i].location.coordinates[1]})
       dis = distance(lat,long,locations[i].lat,locations[i].long,"K")
       console.log(dis);
-      if(dis<10.0){
+      if(dis<10){
         res.status(200).json({
           "data":{newObservation},
           "status":"Warning",
@@ -553,11 +553,16 @@ exports.getObservationsforLocation = async (req, res, next) => {
       }
     }
     console.log("success");
+    res.status(200).json({
+      "data":{},
+      "status":"Normal",
+      "message":"No New location detected near you"
+    })
     }
     else{
       res.status(400).json({
         "data":{},
-        "status":"400",
+        "status":"error",
         "message":"Internal server error"
       })
     }

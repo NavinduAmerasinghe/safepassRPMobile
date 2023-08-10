@@ -5,6 +5,7 @@ import * as TaskManager from 'expo-task-manager';
 import * as Permissions from 'expo-permissions';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
+import * as BackgroundFetch from 'expo-background-fetch';
 
 const LOCATION_TRACKING = 'location-tracking';
 var l1;
@@ -36,6 +37,12 @@ TaskManager.defineTask(LOCATION_TRACKING, async ({ data, error }) => {
             if(resultData.status==="Warning"){
                 console.log(resultData);
                 schedulePushNotification(resultData.data.newObservation.animalName);
+            }
+            else if(resultData.status==="Normal"){
+              console.log(resultData.message);
+            }
+            else if(resultData.status==="error"){
+              console.warn(resultData.message);
             }
         console.log( 
             `${new Date(Date.now()).toLocaleString()}: ${lat},${long}`

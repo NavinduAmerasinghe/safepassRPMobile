@@ -20,6 +20,7 @@ import LandingScreen from "./screen/HomeScreen/HomeScreen";
 import GeofenceMap from "./screen/GeofenceMap/GeofenceMap";
 import BackgroundFetchScreen from "./screen/BackgroundFetch/backgroundFetch";
 import UserLocation from "./screen/Location/UserLocation";
+import * as Notifications from "expo-notifications";
 // import Sound from 'react-native-sound';
 //app.js
 
@@ -146,6 +147,15 @@ const HomeScreen = ({ navigation }) => {
 const Stack = createStackNavigator();
 
 const App = () => {
+
+  Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldShowAlert: true,
+      shouldPlaySound: true,
+      shouldSetBadge: true,
+    }),
+  });
+
   return (
     <NavigationContainer>
       <Stack.Navigator

@@ -68,7 +68,7 @@ const Login = ({ navigation }) => {
   const handleSubmit = async () => {
     // e.preventDefault();
     try {
-      const url = "http://192.168.1.6:8000/api/signin";
+      const url = "http://192.168.8.114:8000/api/signin";
     const data = {
       email,
       password,

@@ -2,6 +2,7 @@
   "expo": {
     "name": "safepass",
     "slug": "safepass",
+    "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,7 +19,8 @@
       "supportsTablet": true,
       "infoPlist": {
         "NSLocationAlwaysAndWhenInUseUsageDescription": "This app needs access to location data when running in the foreground and background.",
-        "NSLocationWhenInUseUsageDescription": "This app needs access to location data when running in the foreground."
+        "NSLocationWhenInUseUsageDescription": "This app needs access to location data when running in the foreground.",
+        "UIBackgroundModes": ["location", "fetch"]
       }
     },
     "android": {

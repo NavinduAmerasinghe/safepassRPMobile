@@ -542,8 +542,8 @@ exports.getObservationsforLocation = async (req, res, next) => {
       id = observations[i]._id
       locations.push({"lat":observations[i].location.coordinates[0],"long":observations[i].location.coordinates[1]})
       dis = distance(lat,long,locations[i].lat,locations[i].long,"K")
-      console.log(dis);
-      if(dis<6.0){
+      //console.log(dis);
+      if(dis<10.0){
         res.status(200).json({
           "data":{newObservation},
           "status":"Warning",
@@ -551,7 +551,7 @@ exports.getObservationsforLocation = async (req, res, next) => {
         })
       }
     }
-    console.log(locations);
+    console.log("success");
     }
     else{
       res.status(400).json({

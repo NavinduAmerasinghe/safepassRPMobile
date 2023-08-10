@@ -18,7 +18,6 @@ import LoginScreen from "./screen/loginScreen/loginScreen";
 import SignupScreen from "./screen/signupScreen/signupScreen";
 import LandingScreen from "./screen/HomeScreen/HomeScreen";
 import GeofenceMap from "./screen/GeofenceMap/GeofenceMap";
-import BackgroundFetchScreen from "./screen/BackgroundFetch/backgroundFetch";
 import UserLocation from "./screen/Location/UserLocation";
 import * as Notifications from "expo-notifications";
 // import Sound from 'react-native-sound';
@@ -105,6 +104,7 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <UserLocation/>
       <FlatList
         data={animalinfo}
         renderItem={renderProductItem}
@@ -170,7 +170,6 @@ const App = () => {
         <Stack.Screen name="signupScreen" component={SignupScreen} />
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="GuideLines" component={GuideLine} />
-        <Stack.Screen name="BackgroundFetch" component={BackgroundFetchScreen}/>
         <Stack.Screen name="UserLocation" component={UserLocation}/>
       </Stack.Navigator>
     </NavigationContainer>

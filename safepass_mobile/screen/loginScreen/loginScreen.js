@@ -84,8 +84,7 @@ const Login = ({ navigation }) => {
     if (response.status === 200) {
       setValues({ email: "", password: "" });
       alert("Logged In");
-      //navigation.navigate("HomeScreen");
-      navigation.navigate("UserLocation");
+      navigation.navigate("HomeScreen");
     } else if (response.status === 401) {
       alert("Invalid email or password");
     } else {

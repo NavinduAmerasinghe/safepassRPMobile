@@ -6,7 +6,9 @@ import { darkGreen } from "../constants";
 import Field from "../field";
 import axios from "axios";
 
+
 const Login = ({ navigation }) => {
+  
   const [values, setValues] = useState({
     email: "dulnathamerasinghe@gmail.com",
     password: "Dulnath@123",
@@ -68,11 +70,11 @@ const Login = ({ navigation }) => {
   const handleSubmit = async () => {
     // e.preventDefault();
     try {
-      const url = "http://192.168.8.114:8000/api/signin";
-    const data = {
-      email,
-      password,
-    };
+      const url = "http://192.168.1.70:8000/api/signin";
+      const data = {
+        email,
+        password,
+      };
 
     const response = await fetch(url, {
       method: "POST",
@@ -85,7 +87,7 @@ const Login = ({ navigation }) => {
       setValues({ email: "", password: "" });
       alert("Logged In");
        navigation.navigate("HomeScreen");
-      //navigation.navigate("UserLocation")
+      //navigation.navigate("BackgroundFetchScreen")
     } else if (response.status === 401) {
       alert("Invalid email or password");
     } else {

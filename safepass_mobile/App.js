@@ -18,13 +18,25 @@ import LoginScreen from "./screen/loginScreen/loginScreen";
 import SignupScreen from "./screen/signupScreen/signupScreen";
 import LandingScreen from "./screen/HomeScreen/HomeScreen";
 import GeofenceMap from "./screen/GeofenceMap/GeofenceMap";
-import UserLocation from "./screen/Location/UserLocation";
+// import UserLocation from "./screen/Location/UserLocation";
 import * as Notifications from "expo-notifications";
+import BackgroundFetchScreen from "./screen/Location/BackgroundFetchScreen";
+import Notification from "./screen/Location/Notification";
+import UserLocation from "./screen/Location/UserLocation";
+
 // import Sound from 'react-native-sound';
 //app.js
 
 // import Sound from 'react-native-sound';
 // import { Platform } from 'react-native';
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
 
 const HomeScreen = ({ navigation }) => {
   const [selectedAnimal, setSelectedProduct] = useState(null);
@@ -103,6 +115,7 @@ const HomeScreen = ({ navigation }) => {
   );
 
   return (
+    
     <View style={styles.container}>
       <UserLocation/>
       <FlatList
@@ -170,7 +183,8 @@ const App = () => {
         <Stack.Screen name="signupScreen" component={SignupScreen} />
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="GuideLines" component={GuideLine} />
-        <Stack.Screen name="UserLocation" component={UserLocation}/>
+        {/* <Stack.Screen name="UserLocation" component={UserLocation}/> */}
+        <Stack.Screen name="BackgroundFetchScreen" component={BackgroundFetchScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

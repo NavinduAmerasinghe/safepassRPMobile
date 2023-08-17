@@ -16,7 +16,9 @@ import GuideLine from "./screen/Notification";
 import { Audio } from "expo-av";
 import LoginScreen from "./screen/loginScreen/loginScreen";
 import SignupScreen from "./screen/signupScreen/signupScreen";
-import LandingScreen from "./screen/HomeScreen/HomeScreen";
+import LandingScreen from "./screen/LandingScreen/LandingScreen";
+import DashBoardScreen from "./screen/DashBoardScreen/DashBoardScreen";
+import TabNavScreen from "./screen/TabNavScreen/TabNavScreen";
 import GeofenceMap from "./screen/GeofenceMap/GeofenceMap";
 import UserLocation from "./screen/Location/UserLocation";
 import * as Notifications from "expo-notifications";
@@ -104,7 +106,7 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <UserLocation/>
+      <UserLocation />
       <FlatList
         data={animalinfo}
         renderItem={renderProductItem}
@@ -147,7 +149,6 @@ const HomeScreen = ({ navigation }) => {
 const Stack = createStackNavigator();
 
 const App = () => {
-
   Notifications.setNotificationHandler({
     handleNotification: async () => ({
       shouldShowAlert: true,
@@ -159,18 +160,20 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-      // initialRouteName="HomeScreen"
-      // screenOptions={{
-      //   headerShown: false,
-      // }}
+        // initialRouteName="HomeScreen"
+        screenOptions={{
+          headerShown: false,
+        }}
       >
         {/* <Stack.Screen name="GeofenceMap" component={GeofenceMap} /> */}
         <Stack.Screen name="LandingScreen" component={LandingScreen} />
         <Stack.Screen name="loginScreen" component={LoginScreen} />
         <Stack.Screen name="signupScreen" component={SignupScreen} />
+        <Stack.Screen name="DashBoardScreen" component={DashBoardScreen} />
+        <Stack.Screen name="TabNavScreen" component={TabNavScreen} />
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="GuideLines" component={GuideLine} />
-        <Stack.Screen name="UserLocation" component={UserLocation}/>
+        <Stack.Screen name="UserLocation" component={UserLocation} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -11,7 +11,7 @@ const Login = ({ navigation }) => {
     email: "dulnathamerasinghe@gmail.com",
     password: "Dulnath@123",
   });
-  const[baseUrl,setBaseUrl] = useState(process.env.BASE_URL);
+  const [baseUrl, setBaseUrl] = useState(process.env.BASE_URL);
   const { email, password } = values;
 
   const handleChange = (email) => (text) => {
@@ -68,36 +68,34 @@ const Login = ({ navigation }) => {
   const handleSubmit = async () => {
     // e.preventDefault();
     try {
-      const url = "http://192.168.8.114:8000/api/signin";
-    const data = {
-      email,
-      password,
-    };
+      const url = "http://192.168.1.6:8000/api/signin";
+      const data = {
+        email,
+        password,
+      };
 
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    if (response.status === 200) {
-      setValues({ email: "", password: "" });
-      alert("Logged In");
-       navigation.navigate("HomeScreen");
-      //navigation.navigate("UserLocation")
-    } else if (response.status === 401) {
-      alert("Invalid email or password");
-    } else {
-      console.log(response.status);
-    }
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      if (response.status === 200) {
+        setValues({ email: "", password: "" });
+        alert("Logged In");
+        navigation.navigate("TabNavScreen");
+        //navigation.navigate("UserLocation")
+      } else if (response.status === 401) {
+        alert("Invalid email or password");
+      } else {
+        console.log(response.status);
+      }
     } catch (error) {
       console.log(error);
       alert(error);
     }
-    
   };
-  
 
   return (
     <Background>
@@ -122,7 +120,15 @@ const Login = ({ navigation }) => {
             alignItems: "center",
           }}
         >
-          <Text style={{ fontSize: 40, color: darkGreen, fontWeight: "bold" }}>
+          <Text
+            style={{
+              fontSize: 40,
+              color: darkGreen,
+              fontWeight: "bold",
+              marginLeft: "20px",
+              paddingRight: "10px",
+            }}
+          >
             Welcome Back
           </Text>
           <Text
@@ -140,6 +146,12 @@ const Login = ({ navigation }) => {
             value={email}
             onChangeText={handleChange("email")}
             keyboardType={"email-address"}
+            style={{
+              color: "grey",
+              fontSize: 19,
+              fontWeight: "bold",
+              marginBottom: 20,
+            }}
           />
           <Field
             placeholder="Password"

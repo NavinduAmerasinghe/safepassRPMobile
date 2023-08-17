@@ -21,7 +21,7 @@ const SignupScreen = ({ navigation }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("http://192.168.8.101:8000/api/signup", {
+      const { data } = await axios.post("http://192.168.1.6:8000/api/signup", {
         name,
         email,
         password,

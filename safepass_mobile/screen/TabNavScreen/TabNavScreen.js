@@ -8,6 +8,7 @@ import SignupScreen from "../signupScreen/signupScreen";
 import LandingScreen from "../LandingScreen/LandingScreen";
 import GeofenceMap from "../GeofenceMap/GeofenceMap";
 import DashBoardScreen from "../DashBoardScreen/DashBoardScreen";
+import HomeScreen from "../HomeScreen/HomeScreen";
 import { AboutUsScreen } from "../AboutUsScreen/AboutUsScreen";
 import { Entypo } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -78,8 +79,8 @@ const TabNavScreen = () => {
         }}
       />
       <Tab.Screen
-        name="LandingScreen"
-        component={LandingScreen}
+        name="HomeScreen"
+        component={HomeScreen}
         options={{
           tabBarIcon: ({ focused }) => {
             return (

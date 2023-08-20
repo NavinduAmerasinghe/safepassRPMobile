@@ -14,10 +14,11 @@ import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import * as BackgroundFetch from "expo-background-fetch";
 
-const LOCATION_TRACKING = "location-tracking";
+const LOCATION_TRACKING = "location-trackingg";
 var l1;
 var l2;
 
+const base_url = process.env.BASE_URL;
 TaskManager.defineTask(LOCATION_TRACKING, async ({ data, error }) => {
   if (error) {
     console.log("LOCATION_TRACKING task ERROR:", error);
@@ -30,9 +31,9 @@ TaskManager.defineTask(LOCATION_TRACKING, async ({ data, error }) => {
 
     l1 = lat;
     l2 = long;
-
+    console.log(base_url);
     const result = await fetch(
-      "http://192.168.1.6:8000/api/observationsforLocation",
+      "http://192.168.8.223:8000/api/observationsforLocation",
       {
         method: "POST",
         headers: {
@@ -42,14 +43,25 @@ TaskManager.defineTask(LOCATION_TRACKING, async ({ data, error }) => {
       }
     );
     const resultData = await result.json();
-    console.log(resultData.message);
-    if (resultData.status === "Warning") {
-      console.log(resultData);
-      schedulePushNotification(resultData.data.newObservation.animalName);
-    } else if (resultData.status === "Normal") {
-      console.log(resultData.message);
-    } else if (resultData.status === "error") {
-      console.warn(resultData.message);
+    console.log(resultData);
+
+    if (resultData.data.newObservation.length > 0) {
+      for (
+        let index = 0;
+        index < resultData.data.newObservation.length;
+        index++
+      ) {
+        console.log(resultData.status);
+        if (resultData.status === "Warning") {
+          schedulePushNotification(
+            resultData.data.newObservation[index].animalName
+          );
+        } else if (resultData.status === "Normal") {
+          console.log(resultData.message);
+        } else if (resultData.status === "error") {
+          console.warn(resultData.message);
+        }
+      }
     }
     console.log(`${new Date(Date.now()).toLocaleString()}: ${lat},${long}`);
   }
@@ -85,7 +97,7 @@ function UserLocation() {
   const startLocationTracking = async () => {
     await Location.startLocationUpdatesAsync(LOCATION_TRACKING, {
       accuracy: Location.Accuracy.Highest,
-      timeInterval: 5000,
+      timeInterval: 30000,
       distanceInterval: 0,
     });
     const hasStarted = await Location.hasStartedLocationUpdatesAsync(
@@ -98,7 +110,7 @@ function UserLocation() {
     const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
     if (status !== "granted") {
       console.log("Notification permission not granted.");
-      scheduleNotification();
+      //scheduleNotification()
     } else {
       console.log("Notification permission granted.");
     }

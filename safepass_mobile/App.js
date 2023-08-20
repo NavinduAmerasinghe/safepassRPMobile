@@ -20,9 +20,14 @@ import LandingScreen from "./screen/LandingScreen/LandingScreen";
 import DashBoardScreen from "./screen/DashBoardScreen/DashBoardScreen";
 import TabNavScreen from "./screen/TabNavScreen/TabNavScreen";
 import GeofenceMap from "./screen/GeofenceMap/GeofenceMap";
-import UserLocation from "./screen/Location/UserLocation";
-// import * as Notifications from "expo-notifications";
+
 import HomeScreen from "./screen/HomeScreen/HomeScreen";
+// import UserLocation from "./screen/Location/UserLocation";
+import * as Notifications from "expo-notifications";
+import BackgroundFetchScreen from "./screen/Location/BackgroundFetchScreen";
+import Notification from "./screen/Location/Notification";
+import UserLocation from "./screen/Location/UserLocation";
+
 // import Sound from 'react-native-sound';
 //app.js
 
@@ -32,13 +37,13 @@ import HomeScreen from "./screen/HomeScreen/HomeScreen";
 const Stack = createStackNavigator();
 
 const App = () => {
-  // Notifications.setNotificationHandler({
-  //   handleNotification: async () => ({
-  //     shouldShowAlert: true,
-  //     shouldPlaySound: true,
-  //     shouldSetBadge: true,
-  //   }),
-  // });
+  Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldShowAlert: true,
+      shouldPlaySound: true,
+      shouldSetBadge: true,
+    }),
+  });
 
   return (
     <NavigationContainer>
@@ -56,7 +61,11 @@ const App = () => {
         <Stack.Screen name="TabNavScreen" component={TabNavScreen} />
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="GuideLines" component={GuideLine} />
-        <Stack.Screen name="UserLocation" component={UserLocation} />
+        {/* <Stack.Screen name="UserLocation" component={UserLocation}/> */}
+        <Stack.Screen
+          name="BackgroundFetchScreen"
+          component={BackgroundFetchScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

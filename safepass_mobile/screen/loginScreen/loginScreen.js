@@ -68,7 +68,7 @@ const Login = ({ navigation }) => {
   const handleSubmit = async () => {
     // e.preventDefault();
     try {
-      const url = "http://192.168.45.181:8000/api/signin";
+      const url = "http://192.168.8.223:8000/api/signin";
       const data = {
         email,
         password,
@@ -85,7 +85,7 @@ const Login = ({ navigation }) => {
         setValues({ email: "", password: "" });
         alert("Logged In");
         navigation.navigate("TabNavScreen");
-        //navigation.navigate("UserLocation")
+        //navigation.navigate("BackgroundFetchScreen")
       } else if (response.status === 401) {
         alert("Invalid email or password");
       } else {

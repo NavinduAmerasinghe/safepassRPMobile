@@ -20,9 +20,9 @@ const screenOptions = {
   tabBarStyle: {
     height: 60,
     position: "absolute",
-    bottom: 16,
-    right: 16,
-    left: 16,
+    bottom: 0,
+    right: 0,
+    left: 0,
     borderRadius: 10,
     elevation: 2,
     background: "#fff",

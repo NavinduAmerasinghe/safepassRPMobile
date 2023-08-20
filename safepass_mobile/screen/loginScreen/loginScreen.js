@@ -5,6 +5,7 @@ import Btn from "../btn";
 import { darkGreen } from "../constants";
 import Field from "../field";
 import axios from "axios";
+import { BASE_URL } from "@env";
 
 const Login = ({ navigation }) => {
   const [values, setValues] = useState({
@@ -68,7 +69,7 @@ const Login = ({ navigation }) => {
   const handleSubmit = async () => {
     // e.preventDefault();
     try {
-      const url = "http://192.168.8.223:8000/api/signin";
+      const url = `${BASE_URL}/api/signin`;
       const data = {
         email,
         password,

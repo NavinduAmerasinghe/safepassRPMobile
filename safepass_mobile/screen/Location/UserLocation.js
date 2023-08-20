@@ -13,6 +13,7 @@ import * as Permissions from "expo-permissions";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import * as BackgroundFetch from "expo-background-fetch";
+import { BASE_URL } from "@env";
 
 const LOCATION_TRACKING = "location-trackingg";
 var l1;
@@ -32,16 +33,13 @@ TaskManager.defineTask(LOCATION_TRACKING, async ({ data, error }) => {
     l1 = lat;
     l2 = long;
     console.log(base_url);
-    const result = await fetch(
-      "http://192.168.8.223:8000/api/observationsforLocation",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ lat, long }),
-      }
-    );
+    const result = await fetch(`${BASE_URL}/api/observationsforLocation`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ lat, long }),
+    });
     const resultData = await result.json();
     console.log(resultData);
 

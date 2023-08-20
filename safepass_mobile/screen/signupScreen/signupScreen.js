@@ -5,6 +5,7 @@ import Btn from "../btn";
 import { darkGreen } from "../constants";
 import Field from "../field";
 import axios from "axios";
+import { BASE_URL } from "@env";
 
 const SignupScreen = ({ navigation }) => {
   const [values, setValues] = useState({
@@ -21,7 +22,7 @@ const SignupScreen = ({ navigation }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("http://192.168.1.6:8000/api/signup", {
+      const { data } = await axios.post(`${BASE_URL}/api/signup`, {
         name,
         email,
         password,

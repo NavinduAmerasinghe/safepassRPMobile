@@ -90,7 +90,9 @@ const TabNavScreen = () => {
                   size={24}
                   color={focused ? "#16247d" : "#111"}
                 />
-                <Text style={{ fontSize: 12, color: "#16247d" }}>HOME</Text>
+                <Text style={{ fontSize: 12, color: "#16247d" }}>
+                  Guidlines
+                </Text>
               </View>
             );
           },
@@ -108,7 +110,7 @@ const TabNavScreen = () => {
                   size={24}
                   color={focused ? "#16247d" : "#111"}
                 />
-                <Text style={{ fontSize: 12, color: "#16247d" }}>ABOUT US</Text>
+                <Text style={{ fontSize: 12, color: "#16247d" }}>About Us</Text>
               </View>
             );
           },

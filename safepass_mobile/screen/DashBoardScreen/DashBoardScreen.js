@@ -11,6 +11,7 @@ import ScreenWrapper from "../../components/screenWrapper";
 import randomImage from "../../assets/images/randomImage";
 import EmptyList from "../../components/emptyList";
 import { colors } from "../../theme";
+import UserLocation from "../../screen/Location/UserLocation";
 // const items = [
 //   {
 //     id: 1,
@@ -53,7 +54,7 @@ export default function DashBoardScreen() {
           source={require("../../assets/images/banner.png")}
           className="w-60 h-60"
         /> */}
-        <Button title="ffwedfsdfdffd" />
+        <UserLocation />
       </View>
       <View className="px-4 space-y-3">
         <View className="flex-row justify-between items-center">

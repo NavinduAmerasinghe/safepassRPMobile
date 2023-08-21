@@ -11,7 +11,6 @@ import {
 import Modal from "react-native-modal";
 import animalinfo from "../../screen/data/AnimalInfo";
 import { Audio } from "expo-av";
-import UserLocation from "../../screen/Location/UserLocation";
 // import Sound from 'react-native-sound';
 //app.js
 
@@ -96,7 +95,6 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <UserLocation />
       <FlatList
         data={animalinfo}
         renderItem={renderProductItem}

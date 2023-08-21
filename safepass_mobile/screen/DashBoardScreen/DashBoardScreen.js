@@ -12,6 +12,7 @@ import randomImage from "../../assets/images/randomImage";
 import EmptyList from "../../components/emptyList";
 import { colors } from "../../theme";
 import UserLocation from "../../screen/Location/UserLocation";
+import Background from "../background";
 // const items = [
 //   {
 //     id: 1,
@@ -35,112 +36,114 @@ import UserLocation from "../../screen/Location/UserLocation";
 //   },
 // ];
 
-export default function DashBoardScreen() {
+export default function DashBoardScreen({ navigation }) {
   return (
-    <ScreenWrapper className="flex-1">
-      <View className="flex-row justify-between items-center p-4">
-        <Text className={`${colors.heading} font-bold text-3xl shadow-sm`}>
-          DashBoard
-        </Text>
-        <TouchableOpacity
-          // onPress={handleLogout}
-          className="p-2 px-3 bg-white border border-gray-200 rounded-full"
-        >
-          <Text className={colors.heading}>Logoutt</Text>
-        </TouchableOpacity>
-      </View>
-      <View className="flex-row justify-center items-center bg-blue-200 rounded-xl mx-4 mb-4">
-        {/* <Image
+    <Background>
+      <ScreenWrapper className="flex-1">
+        <View className="flex-row justify-between items-center p-4">
+          <Text className={`${colors.heading} font-bold text-3xl shadow-sm`}>
+            DashBoard
+          </Text>
+          <TouchableOpacity
+            // onPress={handleLogout}
+            className="p-2 px-3 bg-white border border-gray-200 rounded-full"
+          >
+            <Text className={colors.heading}>Logout</Text>
+          </TouchableOpacity>
+        </View>
+        <View className="flex-row justify-center items-center bg-blue-200 rounded-xl mx-4 mb-4">
+          {/* <Image
           source={require("../../assets/images/banner.png")}
           className="w-60 h-60"
         /> */}
-        <UserLocation />
-      </View>
-      <View className="px-4 space-y-3">
-        <View className="flex-row justify-between items-center">
-          <Text className={`${colors.heading} font-bold text-xl`}>
-            Quick Access
-          </Text>
-          <TouchableOpacity
-            // onPress={() => navigation.navigate("AddTrip")}
-            className="p-2 px-3 bg-white border border-gray-200 rounded-full"
-          >
-            <Text className={colors.heading}>Add Tripp</Text>
-          </TouchableOpacity>
+          <UserLocation />
         </View>
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
-          <TouchableOpacity
-            // onPress={() =>
-            //   navigation.navigate("TripExpenses", { ...item })
-            // }
-            className="bg-white p-3 rounded-2xl mb-3 shadow-sm"
+        <View className="px-4 space-y-3">
+          <View className="flex-row justify-between items-center mb-8">
+            <Text
+              className={`${colors.heading} font-bold text-xl`}
+              style={{ color: "white" }}
+            >
+              Quick Access
+            </Text>
+            <TouchableOpacity
+              // onPress={() => navigation.navigate("AddTrip")}
+              className="p-2 px-3 bg-white border border-gray-200 rounded-full"
+            >
+              <Text className={colors.heading}>Add Feature</Text>
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
           >
-            <View>
-              <Image source={randomImage()} className="w-36 h-36 mb-2" />
-              <Text className={`${colors.heading} font-bold`}>
-                Animal Details
-              </Text>
-              <Text className={`${colors.heading} text-xs`}>Guidlines</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            // onPress={() =>
-            //   navigation.navigate("TripExpenses", { ...item })
-            // }
-            className="bg-white p-3 rounded-2xl mb-3 shadow-sm"
+            <TouchableOpacity
+              onPress={() => navigation.navigate("HomeScreen")}
+              className="bg-white p-3 rounded-2xl mb-3 shadow-sm mr-4"
+            >
+              <View>
+                <Image source={randomImage()} className="w-36 h-36 mb-2" />
+                <Text className={`${colors.heading} font-bold`}>
+                  Animal Details
+                </Text>
+                <Text className={`${colors.heading} text-xs`}>Guidlines</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              // onPress={() =>
+              //   navigation.navigate("TripExpenses", { ...item })
+              // }
+              className="bg-white p-3 rounded-2xl mb-3 shadow-sm"
+            >
+              <View>
+                <Image source={randomImage()} className="w-36 h-36 mb-2" />
+                <Text className={`${colors.heading} font-bold`}>
+                  Animal Details
+                </Text>
+                <Text className={`${colors.heading} text-xs`}>Guidlines</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
           >
-            <View>
-              <Image source={randomImage()} className="w-36 h-36 mb-2" />
-              <Text className={`${colors.heading} font-bold`}>
-                Animal Details
-              </Text>
-              <Text className={`${colors.heading} text-xs`}>Guidlines</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
-          <TouchableOpacity
-            // onPress={() =>
-            //   navigation.navigate("TripExpenses", { ...item })
-            // }
-            className="bg-white p-3 rounded-2xl mb-3 shadow-sm"
-          >
-            <View>
-              <Image source={randomImage()} className="w-36 h-36 mb-2" />
-              <Text className={`${colors.heading} font-bold`}>
-                Animal Details
-              </Text>
-              <Text className={`${colors.heading} text-xs`}>Guidlines</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            // onPress={() =>
-            //   navigation.navigate("TripExpenses", { ...item })
-            // }
-            className="bg-white p-3 rounded-2xl mb-3 shadow-sm"
-          >
-            <View>
-              <Image source={randomImage()} className="w-36 h-36 mb-2" />
-              <Text className={`${colors.heading} font-bold`}>
-                Animal Details
-              </Text>
-              <Text className={`${colors.heading} text-xs`}>Guidlines</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-        {/* <View style={{ height: 430 }}>
+            <TouchableOpacity
+              // onPress={() =>
+              //   navigation.navigate("TripExpenses", { ...item })
+              // }
+              className="bg-white p-3 rounded-2xl mb-3 shadow-sm"
+            >
+              <View>
+                <Image source={randomImage()} className="w-36 h-36 mb-2" />
+                <Text className={`${colors.heading} font-bold`}>
+                  Animal Details
+                </Text>
+                <Text className={`${colors.heading} text-xs`}>Guidlines</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              // onPress={() =>
+              //   navigation.navigate("TripExpenses", { ...item })
+              // }
+              className="bg-white p-3 rounded-2xl mb-3 shadow-sm"
+            >
+              <View>
+                <Image source={randomImage()} className="w-36 h-36 mb-2" />
+                <Text className={`${colors.heading} font-bold`}>
+                  Animal Details
+                </Text>
+                <Text className={`${colors.heading} text-xs`}>Guidlines</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+          {/* <View style={{ height: 430 }}>
           <FlatList
             data={items}
             numColumns={2}
@@ -172,7 +175,8 @@ export default function DashBoardScreen() {
             }}
           />
         </View> */}
-      </View>
-    </ScreenWrapper>
+        </View>
+      </ScreenWrapper>
+    </Background>
   );
 }

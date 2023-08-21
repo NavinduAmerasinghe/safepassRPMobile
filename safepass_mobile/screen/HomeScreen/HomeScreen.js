@@ -136,9 +136,9 @@ const HomeScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    // paddingHorizontal: 16,
-    // paddingTop: 16,
+    flex: 1,
+    paddingHorizontal: 16,
+    paddingTop: 16,
   },
   productItem: {
     marginBottom: 16,

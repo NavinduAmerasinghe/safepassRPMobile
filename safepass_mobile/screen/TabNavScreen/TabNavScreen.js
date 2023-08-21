@@ -12,6 +12,7 @@ import HomeScreen from "../HomeScreen/HomeScreen";
 import { AboutUsScreen } from "../AboutUsScreen/AboutUsScreen";
 import { Entypo } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 const screenOptions = {
@@ -23,9 +24,9 @@ const screenOptions = {
     bottom: 0,
     right: 0,
     left: 0,
-    borderRadius: 10,
+    borderRadius: 0,
     elevation: 2,
-    background: "#fff",
+    backgroundColor: "#16247d",
   },
 };
 const TabNavScreen = () => {
@@ -35,44 +36,25 @@ const TabNavScreen = () => {
         name="DashBoardScreen"
         component={DashBoardScreen}
         options={{
-          tabBarShowLabel: false,
-          tabBarIcon: ({ focused }) => {
-            return (
-              <View style={{ alignItems: "center", justifyContent: "center" }}>
-                <Entypo
-                  name="home"
-                  size={24}
-                  color={focused ? "#16247d" : "#111"}
-                />
-                <Text style={{ fontSize: 12, color: "#16247d" }}>HOME</Text>
-              </View>
-            );
-          },
-        }}
-      />
-      <Tab.Screen
-        name="SignupScreen"
-        component={SignupScreen}
-        options={{
           tabBarIcon: ({ focused }) => {
             return (
               <View
                 style={{
                   alignItems: "center",
                   justifyContent: "center",
-                  backgroundColor: "#16247d",
+                  backgroundColor: "#16241d",
                   width: Platform.OS == "ios" ? 50 : 60,
                   height: Platform.OS == "ios" ? 50 : 60,
                   top: Platform.OS == "ios" ? -10 : -20,
                   borderRadius: Platform.OS == "ios" ? 25 : 30,
                 }}
               >
-                <Entypo
-                  name="home"
+                <MaterialIcons
+                  name="dashboard"
                   size={24}
-                  color={focused ? "#16247d" : "#111"}
+                  color={focused ? "#fff" : "#111"}
                 />
-                <Text style={{ fontSize: 12, color: "#16247d" }}>HOME</Text>
+                <Text style={{ fontSize: 8, color: "#fff" }}>DashBoard</Text>
               </View>
             );
           },
@@ -85,14 +67,12 @@ const TabNavScreen = () => {
           tabBarIcon: ({ focused }) => {
             return (
               <View style={{ alignItems: "center", justifyContent: "center" }}>
-                <Entypo
-                  name="home"
+                <MaterialIcons
+                  name="integration-instructions"
                   size={24}
-                  color={focused ? "#16247d" : "#111"}
+                  color={focused ? "#fff" : "#111"}
                 />
-                <Text style={{ fontSize: 12, color: "#16247d" }}>
-                  Guidlines
-                </Text>
+                <Text style={{ fontSize: 12, color: "#fff" }}>Guidlines</Text>
               </View>
             );
           },
@@ -105,12 +85,12 @@ const TabNavScreen = () => {
           tabBarIcon: ({ focused }) => {
             return (
               <View style={{ alignItems: "center", justifyContent: "center" }}>
-                <MaterialIcons
-                  name="emoji-people"
-                  size={24}
-                  color={focused ? "#16247d" : "#111"}
+                <FontAwesome
+                  name="users"
+                  size={18}
+                  color={focused ? "#fff" : "#111"}
                 />
-                <Text style={{ fontSize: 12, color: "#16247d" }}>About Us</Text>
+                <Text style={{ fontSize: 12, color: "#fff" }}>About Us</Text>
               </View>
             );
           },

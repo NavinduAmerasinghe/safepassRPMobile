@@ -1,11 +1,18 @@
 import React, { useState } from "react";
-import { View, Text, Touchable, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Touchable,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
 import Background from "../background";
 import Btn from "../btn";
 import { darkGreen } from "../constants";
 import Field from "../field";
 import axios from "axios";
 import { BASE_URL } from "@env";
+import { Video } from "expo-av";
 
 const SignupScreen = ({ navigation }) => {
   const [values, setValues] = useState({
@@ -39,13 +46,32 @@ const SignupScreen = ({ navigation }) => {
     }
   };
   return (
-    <Background>
+    <View style={{ alignItems: "center" }}>
+      <Video
+        source={require("../../assets/background.mp4")}
+        style={styles.video}
+        isMuted={true} // Use isMuted instead of muted
+        shouldPlay
+        isLooping
+        resizeMode="cover"
+      />
       <View style={{ alignItems: "center", width: 460 }}>
+        <Text
+          style={{
+            color: "#B53471",
+            fontSize: 70,
+            fontFamily: "Sofia",
+            marginTop: 80,
+          }}
+        >
+          Safe Pass
+        </Text>
         <Text
           style={{
             color: "white",
             fontSize: 64,
             fontWeight: "bold",
+            fontFamily: "Sofia",
             marginTop: 20,
           }}
         >
@@ -63,7 +89,6 @@ const SignupScreen = ({ navigation }) => {
         </Text>
         <View
           style={{
-            backgroundColor: "white",
             height: 700,
             width: 460,
             borderTopLeftRadius: 130,
@@ -140,7 +165,7 @@ const SignupScreen = ({ navigation }) => {
               justifyContent: "center",
             }}
           >
-            <Text style={{ fontSize: 16, fontWeight: "bold" }}>
+            <Text style={{ fontSize: 16, fontWeight: "bold", color: "white" }}>
               Already have an account ?{" "}
             </Text>
             <TouchableOpacity
@@ -155,8 +180,13 @@ const SignupScreen = ({ navigation }) => {
           </View>
         </View>
       </View>
-    </Background>
+    </View>
   );
 };
-
+const styles = StyleSheet.create({
+  video: {
+    ...StyleSheet.absoluteFillObject, // Make the video fill the entire container
+  },
+  // Define any other styles here
+});
 export default SignupScreen;

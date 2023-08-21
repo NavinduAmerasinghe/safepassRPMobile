@@ -1,11 +1,18 @@
 import React, { useState } from "react";
-import { View, Text, Touchable, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Touchable,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
 import Background from "../background";
 import Btn from "../btn";
 import { darkGreen } from "../constants";
 import Field from "../field";
 import axios from "axios";
 import { BASE_URL } from "@env";
+import { Video } from "expo-av";
 
 const Login = ({ navigation }) => {
   const [values, setValues] = useState({
@@ -99,21 +106,29 @@ const Login = ({ navigation }) => {
   };
 
   return (
-    <Background>
+    <View style={{ alignItems: "center" }}>
+      <Video
+        source={require("../../assets/background.mp4")}
+        style={styles.video}
+        isMuted={true} // Use isMuted instead of muted
+        shouldPlay
+        isLooping
+        resizeMode="cover"
+      />
       <View style={{ alignItems: "center", width: 460 }}>
         <Text
           style={{
-            color: "white",
-            fontSize: 64,
-            fontWeight: "bold",
-            marginVertical: 20,
+            color: "#B53471",
+            fontSize: 70,
+            fontFamily: "Sofia",
+            marginTop: 80,
           }}
         >
-          Login
+          Safe Pass
         </Text>
         <View
           style={{
-            backgroundColor: "white",
+            // backgroundColor: "rgba(255, 255, 255, 0.5)",
             height: 700,
             width: 460,
             borderTopLeftRadius: 130,
@@ -126,7 +141,7 @@ const Login = ({ navigation }) => {
               fontSize: 40,
               color: darkGreen,
               fontWeight: "bold",
-              marginLeft: "20px",
+
               paddingRight: "10px",
             }}
           >
@@ -147,12 +162,6 @@ const Login = ({ navigation }) => {
             value={email}
             onChangeText={handleChange("email")}
             keyboardType={"email-address"}
-            style={{
-              color: "grey",
-              fontSize: 19,
-              fontWeight: "bold",
-              marginBottom: 20,
-            }}
           />
           <Field
             placeholder="Password"
@@ -164,8 +173,8 @@ const Login = ({ navigation }) => {
             style={{
               alignItems: "flex-end",
               width: "78%",
-              paddingRight: 16,
-              marginBottom: 200,
+              paddingRight: 32,
+              marginBottom: 100,
             }}
           >
             <Text
@@ -180,6 +189,7 @@ const Login = ({ navigation }) => {
             btnLabel="Login"
             // Press={() => alert("Logged In")}
             Press={handleSubmit}
+            style={{}}
           />
           <View
             style={{
@@ -188,7 +198,7 @@ const Login = ({ navigation }) => {
               justifyContent: "center",
             }}
           >
-            <Text style={{ fontSize: 16, fontWeight: "bold" }}>
+            <Text style={{ fontSize: 16, fontWeight: "bold", color: "white" }}>
               Don't have an account ?{" "}
             </Text>
             <TouchableOpacity
@@ -203,8 +213,15 @@ const Login = ({ navigation }) => {
           </View>
         </View>
       </View>
-    </Background>
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  video: {
+    ...StyleSheet.absoluteFillObject, // Make the video fill the entire container
+  },
+  // Define any other styles here
+});
 
 export default Login;

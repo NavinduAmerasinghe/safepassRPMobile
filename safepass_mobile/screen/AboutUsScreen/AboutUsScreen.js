@@ -8,7 +8,7 @@ export const AboutUsScreen = (props) => {
   const [status, setStatus] = useState({});
   return (
     <View style={styles.container}>
-      <Video
+      {/* <Video
         ref={video}
         style={styles.video}
         source={require("../../assets/ProductionDemo.mp4")}
@@ -16,7 +16,7 @@ export const AboutUsScreen = (props) => {
         resizeMode="contain"
         isLooping
         onPlaybackStatusUpdate={setStatus}
-      />
+      /> */}
 
       <StatusBar style="auto" />
       <Text style={styles.title}>About Us</Text>

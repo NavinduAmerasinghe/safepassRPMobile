@@ -41,7 +41,10 @@ export default function DashBoardScreen({ navigation }) {
     <Background>
       <ScreenWrapper className="flex-1">
         <View className="flex-row justify-between items-center p-4">
-          <Text className={`${colors.heading} font-bold text-3xl shadow-sm`}>
+          <Text
+            className={`${colors.heading} font-bold text-3xl shadow-sm`}
+            style={{ color: "#B53471" }}
+          >
             DashBoard
           </Text>
           <TouchableOpacity

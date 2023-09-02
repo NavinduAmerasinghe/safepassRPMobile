@@ -36,14 +36,18 @@ TaskManager.defineTask(LOCATION_TRACKING, async ({ data, error }) => {
 
     l1 = lat;
     l2 = long;
-    //console.log(base_url);
-    const result = await fetch(`http://192.168.223.84:8000/api/observationsforLocation`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ lat, long }),
-    });
+    console.log(base_url);
+    // const result = await fetch(`${BASE_URL}/api/observationsforLocation`, {
+    const result = await fetch(
+      "https://safe-pass.onrender.com/api/signin/api/observationsforLocation",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ lat, long }),
+      }
+    );
     const resultData = await result.json();
     //console.log(resultData);
 

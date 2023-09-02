@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity,
   Vibration,
+  LogBox,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -25,6 +26,9 @@ import HomeScreen from "./screen/HomeScreen/HomeScreen";
 // import UserLocation from "./screen/Location/UserLocation";
 import * as Notifications from "expo-notifications";
 import UserLocation from "./screen/Location/UserLocation";
+
+LogBox.ignoreLogs(["Warning: ..."]); // Ignore log notification by message
+LogBox.ignoreAllLogs();
 
 // import Sound from 'react-native-sound';
 //app.js

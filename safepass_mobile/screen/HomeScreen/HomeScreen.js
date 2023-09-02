@@ -95,6 +95,7 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.heading}>Identified Animals</Text>
       <FlatList
         data={animalinfo}
         renderItem={renderProductItem}
@@ -137,17 +138,35 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 16,
-    paddingTop: 16,
+    paddingHorizontal: 12,
+    paddingTop: 45,
+    backgroundColor: "rgba(0, 25, 0, 0.5)",
+    alignItems: "center",
+    marginBottom: 60,
+  },
+  heading: {
+    fontSize: 24,
+    paddingBottom: 15,
+    fontFamily: "Sofia",
+    color: "white",
   },
   productItem: {
     marginBottom: 16,
+    borderRadius: 10,
+    backgroundColor: "rgba(255, 255, 255, 0.2)",
+    padding: 16,
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
   },
   productImage: {
     width: "100%",
     height: 200,
-    resizeMode: "cover",
+
     marginBottom: 8,
+    borderRadius: 10,
   },
   productTitle: {
     fontSize: 16,
@@ -156,10 +175,11 @@ const styles = StyleSheet.create({
   },
   productDescription: {
     fontSize: 14,
-    color: "#888",
+    fontFamily: "Sofia",
+    color: "white",
   },
   modalContent: {
-    backgroundColor: "#fff",
+    backgroundColor: "white",
     padding: 16,
     borderRadius: 8,
   },
@@ -178,7 +198,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   selectedProductTitle: {
-    fontSize: 16,
+    fontSize: 32,
     fontWeight: "bold",
     marginLeft: "auto",
     marginRight: "auto",

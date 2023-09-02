@@ -29,11 +29,14 @@ const SignupScreen = ({ navigation }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(`${BASE_URL}/api/signup`, {
-        name,
-        email,
-        password,
-      });
+      const { data } = await axios.post(
+        "https://safe-pass.onrender.com/api/signin/api/signup",
+        {
+          name,
+          email,
+          password,
+        }
+      );
       console.log(data);
 
       if (data.success === true) {

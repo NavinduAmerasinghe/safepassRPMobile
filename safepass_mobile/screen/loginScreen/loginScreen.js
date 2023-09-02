@@ -76,7 +76,9 @@ const Login = ({ navigation }) => {
   const handleSubmit = async () => {
     // e.preventDefault();
     try {
-      const url = `${BASE_URL}/api/signin`;
+      // const url = `${BASE_URL}/api/signin`;
+      // const url = "http://192.168.88.181:8000/api/signin";
+      const url = "https://safe-pass.onrender.com/api/signin";
       const data = {
         email,
         password,

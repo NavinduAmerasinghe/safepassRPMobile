@@ -13,28 +13,7 @@ import EmptyList from "../../components/emptyList";
 import { colors } from "../../theme";
 import UserLocation from "../../screen/Location/UserLocation";
 import Background from "../background";
-// const items = [
-//   {
-//     id: 1,
-//     place: "Gujrat",
-//     country: "Pakistan",
-//   },
-//   {
-//     id: 2,
-//     place: "London Eye",
-//     country: "England",
-//   },
-//   {
-//     id: 3,
-//     place: "Washington dc",
-//     country: "America",
-//   },
-//   {
-//     id: 4,
-//     place: "New york",
-//     country: "America",
-//   },
-// ];
+import { AntDesign } from "@expo/vector-icons";
 
 export default function DashBoardScreen({ navigation }) {
   return (
@@ -48,10 +27,13 @@ export default function DashBoardScreen({ navigation }) {
             DashBoard
           </Text>
           <TouchableOpacity
-            // onPress={handleLogout}
+            onPress={() => navigation.navigate("loginScreen")}
             className="p-2 px-3 bg-white border border-gray-200 rounded-full"
           >
-            <Text className={colors.heading}>Logout</Text>
+            <Text className={colors.heading}>
+              <AntDesign name="logout" size={24} color="black" />
+              Logout
+            </Text>
           </TouchableOpacity>
         </View>
         <View className="flex-row justify-center items-center bg-blue-200 rounded-xl mx-4 mb-4">

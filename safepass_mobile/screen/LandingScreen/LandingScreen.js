@@ -3,12 +3,17 @@ import { View, StyleSheet, Text, Image, Button } from "react-native";
 import { Video } from "expo-av"; // Import Video from Expo's AV library
 import Btn from "../btn"; // Make sure Btn is defined and imported
 import { darkGreen, green } from "../constants";
+import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
 
 const Home = (props) => {
-  const [fontLoaded] = useFonts({
+  const [fontsLoaded] = useFonts({
     Sofia: require("../../assets/fonts/Sofia-Regular.ttf"),
   });
+
+  if (!fontsLoaded) {
+    return undefined;
+  }
   return (
     <View>
       <Video
@@ -55,8 +60,9 @@ const Home = (props) => {
           bgColor="#ffa502"
           textColor="white"
           btnLabel="Signup"
-          // Press={() => props.navigation.navigate("signupScreen")}
-          Press={() => console.log("Hii")}
+          Press={() => props.navigation.navigate("signupScreen")}
+
+          // Press={() => console.log("Hii")}
         />
       </View>
     </View>

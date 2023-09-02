@@ -6,7 +6,10 @@ import {
   StyleSheet,
   Button,
   Platform,
+  SafeAreaView
 } from "react-native";
+//import Card
+import { Card } from 'react-native-elements';
 import * as Location from "expo-location";
 import * as TaskManager from "expo-task-manager";
 import * as Permissions from "expo-permissions";
@@ -18,6 +21,7 @@ import { BASE_URL } from "@env";
 const LOCATION_TRACKING = "location-trackingg";
 var l1;
 var l2;
+var displayAnimalName=[];
 
 const base_url = process.env.BASE_URL;
 TaskManager.defineTask(LOCATION_TRACKING, async ({ data, error }) => {
@@ -32,8 +36,8 @@ TaskManager.defineTask(LOCATION_TRACKING, async ({ data, error }) => {
 
     l1 = lat;
     l2 = long;
-    console.log(base_url);
-    const result = await fetch(`${BASE_URL}/api/observationsforLocation`, {
+    //console.log(base_url);
+    const result = await fetch(`http://192.168.223.84:8000/api/observationsforLocation`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +45,7 @@ TaskManager.defineTask(LOCATION_TRACKING, async ({ data, error }) => {
       body: JSON.stringify({ lat, long }),
     });
     const resultData = await result.json();
-    console.log(resultData);
+    //console.log(resultData);
 
     if (resultData.data.newObservation.length > 0) {
       for (
@@ -49,11 +53,12 @@ TaskManager.defineTask(LOCATION_TRACKING, async ({ data, error }) => {
         index < resultData.data.newObservation.length;
         index++
       ) {
-        console.log(resultData.status);
+        //console.log(resultData.status);
         if (resultData.status === "Warning") {
           schedulePushNotification(
             resultData.data.newObservation[index].animalName
           );
+          displayAnimalName.push(resultData.data.newObservation[index])
         } else if (resultData.status === "Normal") {
           console.log(resultData.message);
         } else if (resultData.status === "error") {
@@ -61,7 +66,7 @@ TaskManager.defineTask(LOCATION_TRACKING, async ({ data, error }) => {
         }
       }
     }
-    console.log(`${new Date(Date.now()).toLocaleString()}: ${lat},${long}`);
+    //console.log(`${new Date(Date.now()).toLocaleString()}: ${lat},${long}`);
   }
 
   async function schedulePushNotification(animalName) {
@@ -182,6 +187,7 @@ function UserLocation() {
 
   return (
     <View>
+    <View>
       {locationStarted ? (
         <TouchableOpacity onPress={stopLocation}>
           <Text style={styles.btnText}>Stop Tracking</Text>
@@ -191,19 +197,31 @@ function UserLocation() {
           <Text style={styles.btnText}>Start Tracking</Text>
         </TouchableOpacity>
       )}
-      {/* <Text>Your expo push token: {expoPushToken}</Text>
-          <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Title: {notification && notification.request.content.title} </Text>
-            <Text>Body: {notification && notification.request.content.body}</Text>
-            <Text>Data: {notification && JSON.stringify(notification.request.content.data)}</Text>
-          </View>
-          <Button
-          title="Press to schedule a notification"
-          onPress={async () => {
-            await schedulePushNotification();
-          }}
-        /> */}
+      {locationStarted && displayAnimalName.length>0 &&
+      <SafeAreaView style={cardStyle.container}>
+      <View style={cardStyle.container}>
+        <Card title="Local Modules">
+          {/*react-native-elements Card*/}
+          <Text style={cardStyle.paragraph}>
+            {displayAnimalName[displayAnimalName.length-1].animalName?displayAnimalName[displayAnimalName.length-1].animalName+" "+displayAnimalName[displayAnimalName.length-1].distance.toFixed(4)+" kM":''}
+            </Text>
+            <Text style={cardStyle.paragraph}>
+            {displayAnimalName[displayAnimalName.length-2].animalName?displayAnimalName[displayAnimalName.length-2].animalName+" "+displayAnimalName[displayAnimalName.length-2].distance.toFixed(4)+" kM":''}
+            </Text>
+            <Text style={cardStyle.paragraph}>
+            {displayAnimalName[displayAnimalName.length-3].animalName?displayAnimalName[displayAnimalName.length-3].animalName+" "+displayAnimalName[displayAnimalName.length-2].distance.toFixed(4)+" kM":''}
+            </Text>
+            <Text style={cardStyle.paragraph}>
+            {displayAnimalName[displayAnimalName.length-4].animalName?displayAnimalName[displayAnimalName.length-4].animalName+" "+displayAnimalName[displayAnimalName.length-4].distance.toFixed(4)+" kM":''}
+            </Text>
+        </Card>
+      </View>
+    </SafeAreaView>
+      }
+
     </View>
+
+</View>
   );
 }
 
@@ -216,6 +234,34 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 5,
     marginTop: 10,
+  },
+});
+
+const style = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 50,
+  },
+  item: {
+    padding: 20,
+    fontSize: 15,
+    marginTop: 5,
+  }
+});
+
+const cardStyle = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#ecf0f1',
+  },
+  paragraph: {
+    margin: 24,
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#34495e',
   },
 });
 

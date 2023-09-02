@@ -545,11 +545,16 @@ exports.getObservationsforLocation = async (req, res, next) => {
       for(let i=0; i<observations.length; i++){
 
         id = observations[i]._id
+        
         locations.push({"lat":observations[i].location.coordinates[0],"long":observations[i].location.coordinates[1]})
         dis = distance(lat,long,locations[i].lat,locations[i].long,"K")
-        console.log(dis);
+        //console.log(dis);
         if(dis<25){
-          newObservation.push(observations[i])
+          //console.log(observations[i]);
+          const newObject=new Object();
+          newObject["animalName"] = observations[i].animalName
+          newObject["distance"] = dis
+          newObservation.push(newObject)
         }
       }
 

@@ -24,8 +24,6 @@ import GeofenceMap from "./screen/GeofenceMap/GeofenceMap";
 import HomeScreen from "./screen/HomeScreen/HomeScreen";
 // import UserLocation from "./screen/Location/UserLocation";
 import * as Notifications from "expo-notifications";
-import BackgroundFetchScreen from "./screen/Location/BackgroundFetchScreen";
-import Notification from "./screen/Location/Notification";
 import UserLocation from "./screen/Location/UserLocation";
 
 // import Sound from 'react-native-sound';
@@ -62,10 +60,6 @@ const App = () => {
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="GuideLines" component={GuideLine} />
         {/* <Stack.Screen name="UserLocation" component={UserLocation}/> */}
-        <Stack.Screen
-          name="BackgroundFetchScreen"
-          component={BackgroundFetchScreen}
-        />
       </Stack.Navigator>
     </NavigationContainer>
   );

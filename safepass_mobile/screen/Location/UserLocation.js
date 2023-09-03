@@ -39,7 +39,7 @@ TaskManager.defineTask(LOCATION_TRACKING, async ({ data, error }) => {
     console.log(base_url);
     // const result = await fetch(`${BASE_URL}/api/observationsforLocation`, {
     const result = await fetch(
-      "https://safe-pass.onrender.com/api/signin/api/observationsforLocation",
+      "http://192.168.1.6:8000/api/signin/api/observationsforLocation",
       {
         method: "POST",
         headers: {

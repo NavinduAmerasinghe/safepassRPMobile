@@ -191,6 +191,9 @@ function UserLocation() {
 
   return (
     <View>
+      <Text style={{ color: "white", paddingTop: 10, paddingLeft: 30 }}>
+        For your safe journey
+      </Text>
       <View>
         {locationStarted ? (
           <TouchableOpacity onPress={stopLocation}>
@@ -203,14 +206,16 @@ function UserLocation() {
         )}
         {locationStarted && displayAnimalName.length > 0 && (
           <SafeAreaView style={cardStyle.container}>
-            <View style={cardStyle.container}>
+            <View style={{ justifyContent: "flex-start" }}>
+              {/* <View style={cardStyle.container}> */}
               <Card title="Local Modules">
+                <Text>Animals which are closes to you</Text>
                 {/*react-native-elements Card*/}
                 <Text style={cardStyle.paragraph}>
                   {displayAnimalName[displayAnimalName.length - 1].animalName
                     ? displayAnimalName[displayAnimalName.length - 1]
                         .animalName +
-                      " " +
+                      " - " +
                       displayAnimalName[
                         displayAnimalName.length - 1
                       ].distance.toFixed(4) +
@@ -221,7 +226,7 @@ function UserLocation() {
                   {displayAnimalName[displayAnimalName.length - 2].animalName
                     ? displayAnimalName[displayAnimalName.length - 2]
                         .animalName +
-                      " " +
+                      " - " +
                       displayAnimalName[
                         displayAnimalName.length - 2
                       ].distance.toFixed(4) +
@@ -232,7 +237,7 @@ function UserLocation() {
                   {displayAnimalName[displayAnimalName.length - 3].animalName
                     ? displayAnimalName[displayAnimalName.length - 3]
                         .animalName +
-                      " " +
+                      " - " +
                       displayAnimalName[
                         displayAnimalName.length - 2
                       ].distance.toFixed(4) +
@@ -243,7 +248,7 @@ function UserLocation() {
                   {displayAnimalName[displayAnimalName.length - 4].animalName
                     ? displayAnimalName[displayAnimalName.length - 4]
                         .animalName +
-                      " " +
+                      " - " +
                       displayAnimalName[
                         displayAnimalName.length - 4
                       ].distance.toFixed(4) +
@@ -262,12 +267,13 @@ function UserLocation() {
 const styles = StyleSheet.create({
   btnText: {
     fontSize: 20,
-    backgroundColor: "green",
+    backgroundColor: "#2ecc71",
     color: "white",
     paddingHorizontal: 30,
     paddingVertical: 10,
     borderRadius: 5,
     marginTop: 10,
+    marginBottom: 10,
   },
 });
 
@@ -285,17 +291,27 @@ const style = StyleSheet.create({
 
 const cardStyle = StyleSheet.create({
   container: {
+    // flex: 1,
+    // alignItems: "center",
+    // justifyContent: "center",
+    // backgroundColor: "#ecf0f1",
     flex: 1,
-    alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#ecf0f1",
+    alignItems: "center",
+    marginBottom: 10,
+    elevation: 3,
+    alignItems: "flex-start",
   },
   paragraph: {
-    margin: 24,
-    fontSize: 18,
+    // margin: 24,
+    // fontSize: 18,
+    // fontWeight: "bold",
+    // textAlign: "center",
+    // color: "#34495e",
+    fontSize: 16,
     fontWeight: "bold",
+    marginBottom: 10,
     textAlign: "center",
-    color: "#34495e",
   },
 });
 

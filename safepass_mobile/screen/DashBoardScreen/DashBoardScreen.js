@@ -22,8 +22,8 @@ export default function DashBoardScreen({ navigation }) {
       <ScreenWrapper className="flex-1">
         <View className="flex-row justify-between items-center p-4">
           <Text
-            className={`${colors.heading} font-bold text-3xl shadow-sm`}
-            style={{ color: "#B53471" }}
+            className={`${colors.heading} text-4xl shadow-sm pt-4`}
+            style={{ color: "#B53471", fontFamily: "Sofia" }}
           >
             DashBoard
           </Text>
@@ -37,7 +37,7 @@ export default function DashBoardScreen({ navigation }) {
             </Text>
           </TouchableOpacity>
         </View>
-        <View className="flex-row justify-center items-center bg-blue-200 rounded-xl mx-4 mb-4">
+        <View className="flex-row justify-center items-center bg-blue-900 rounded-xl mx-4 mb-4">
           {/* <Image
             source={require("../../assets/images/banner.png")}
             className="w-60 h-60"
@@ -45,10 +45,10 @@ export default function DashBoardScreen({ navigation }) {
           <UserLocation />
         </View>
         <View className="px-4 space-y-3">
-          <View className="flex-row justify-between items-center mb-8">
+          <View className="flex-row justify-between items-center mb-2">
             <Text
               className={`${colors.heading} font-bold text-xl`}
-              style={{ color: "white" }}
+              style={{ color: "black" }}
             >
               Quick Access
             </Text>

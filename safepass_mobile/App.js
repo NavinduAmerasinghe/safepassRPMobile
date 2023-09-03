@@ -21,7 +21,7 @@ import LandingScreen from "./screen/LandingScreen/LandingScreen";
 import DashBoardScreen from "./screen/DashBoardScreen/DashBoardScreen";
 import TabNavScreen from "./screen/TabNavScreen/TabNavScreen";
 import GeofenceMap from "./screen/GeofenceMap/GeofenceMap";
-
+import LocationHistory from "./screen/LocationHistoryScreen/LocationHistoryScreen";
 import HomeScreen from "./screen/HomeScreen/HomeScreen";
 // import UserLocation from "./screen/Location/UserLocation";
 import * as Notifications from "expo-notifications";
@@ -63,6 +63,7 @@ const App = () => {
         <Stack.Screen name="TabNavScreen" component={TabNavScreen} />
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="GuideLines" component={GuideLine} />
+        <Stack.Screen name="LocationHistory" component={LocationHistory} />
         {/* <Stack.Screen name="UserLocation" component={UserLocation}/> */}
       </Stack.Navigator>
     </NavigationContainer>

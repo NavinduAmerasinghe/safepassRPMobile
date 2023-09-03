@@ -6,10 +6,10 @@ import {
   StyleSheet,
   Button,
   Platform,
-  SafeAreaView
+  SafeAreaView,
 } from "react-native";
 //import Card
-import { Card } from 'react-native-elements';
+import { Card } from "react-native-elements";
 import * as Location from "expo-location";
 import * as TaskManager from "expo-task-manager";
 import * as Permissions from "expo-permissions";
@@ -21,7 +21,7 @@ import { BASE_URL } from "@env";
 const LOCATION_TRACKING = "location-trackingg";
 var l1;
 var l2;
-var displayAnimalName=[];
+var displayAnimalName = [];
 
 const base_url = process.env.BASE_URL;
 TaskManager.defineTask(LOCATION_TRACKING, async ({ data, error }) => {
@@ -39,7 +39,7 @@ TaskManager.defineTask(LOCATION_TRACKING, async ({ data, error }) => {
     console.log(base_url);
     // const result = await fetch(`${BASE_URL}/api/observationsforLocation`, {
     const result = await fetch(
-      "https://safe-pass.onrender.com/api/signin/api/observationsforLocation",
+      "http://192.168.1.6:8000/api/observationsforLocation",
       {
         method: "POST",
         headers: {
@@ -62,7 +62,7 @@ TaskManager.defineTask(LOCATION_TRACKING, async ({ data, error }) => {
           schedulePushNotification(
             resultData.data.newObservation[index].animalName
           );
-          displayAnimalName.push(resultData.data.newObservation[index])
+          displayAnimalName.push(resultData.data.newObservation[index]);
         } else if (resultData.status === "Normal") {
           console.log(resultData.message);
         } else if (resultData.status === "error") {
@@ -191,41 +191,71 @@ function UserLocation() {
 
   return (
     <View>
-    <View>
-      {locationStarted ? (
-        <TouchableOpacity onPress={stopLocation}>
-          <Text style={styles.btnText}>Stop Tracking</Text>
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity onPress={startLocation}>
-          <Text style={styles.btnText}>Start Tracking</Text>
-        </TouchableOpacity>
-      )}
-      {locationStarted && displayAnimalName.length>0 &&
-      <SafeAreaView style={cardStyle.container}>
-      <View style={cardStyle.container}>
-        <Card title="Local Modules">
-          {/*react-native-elements Card*/}
-          <Text style={cardStyle.paragraph}>
-            {displayAnimalName[displayAnimalName.length-1].animalName?displayAnimalName[displayAnimalName.length-1].animalName+" "+displayAnimalName[displayAnimalName.length-1].distance.toFixed(4)+" kM":''}
-            </Text>
-            <Text style={cardStyle.paragraph}>
-            {displayAnimalName[displayAnimalName.length-2].animalName?displayAnimalName[displayAnimalName.length-2].animalName+" "+displayAnimalName[displayAnimalName.length-2].distance.toFixed(4)+" kM":''}
-            </Text>
-            <Text style={cardStyle.paragraph}>
-            {displayAnimalName[displayAnimalName.length-3].animalName?displayAnimalName[displayAnimalName.length-3].animalName+" "+displayAnimalName[displayAnimalName.length-2].distance.toFixed(4)+" kM":''}
-            </Text>
-            <Text style={cardStyle.paragraph}>
-            {displayAnimalName[displayAnimalName.length-4].animalName?displayAnimalName[displayAnimalName.length-4].animalName+" "+displayAnimalName[displayAnimalName.length-4].distance.toFixed(4)+" kM":''}
-            </Text>
-        </Card>
+      <View>
+        {locationStarted ? (
+          <TouchableOpacity onPress={stopLocation}>
+            <Text style={styles.btnText}>Stop Tracking</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity onPress={startLocation}>
+            <Text style={styles.btnText}>Start Tracking</Text>
+          </TouchableOpacity>
+        )}
+        {locationStarted && displayAnimalName.length > 0 && (
+          <SafeAreaView style={cardStyle.container}>
+            <View style={cardStyle.container}>
+              <Card title="Local Modules">
+                {/*react-native-elements Card*/}
+                <Text style={cardStyle.paragraph}>
+                  {displayAnimalName[displayAnimalName.length - 1].animalName
+                    ? displayAnimalName[displayAnimalName.length - 1]
+                        .animalName +
+                      " " +
+                      displayAnimalName[
+                        displayAnimalName.length - 1
+                      ].distance.toFixed(4) +
+                      " kM"
+                    : ""}
+                </Text>
+                <Text style={cardStyle.paragraph}>
+                  {displayAnimalName[displayAnimalName.length - 2].animalName
+                    ? displayAnimalName[displayAnimalName.length - 2]
+                        .animalName +
+                      " " +
+                      displayAnimalName[
+                        displayAnimalName.length - 2
+                      ].distance.toFixed(4) +
+                      " kM"
+                    : ""}
+                </Text>
+                <Text style={cardStyle.paragraph}>
+                  {displayAnimalName[displayAnimalName.length - 3].animalName
+                    ? displayAnimalName[displayAnimalName.length - 3]
+                        .animalName +
+                      " " +
+                      displayAnimalName[
+                        displayAnimalName.length - 2
+                      ].distance.toFixed(4) +
+                      " kM"
+                    : ""}
+                </Text>
+                <Text style={cardStyle.paragraph}>
+                  {displayAnimalName[displayAnimalName.length - 4].animalName
+                    ? displayAnimalName[displayAnimalName.length - 4]
+                        .animalName +
+                      " " +
+                      displayAnimalName[
+                        displayAnimalName.length - 4
+                      ].distance.toFixed(4) +
+                      " kM"
+                    : ""}
+                </Text>
+              </Card>
+            </View>
+          </SafeAreaView>
+        )}
       </View>
-    </SafeAreaView>
-      }
-
     </View>
-
-</View>
   );
 }
 
@@ -250,22 +280,22 @@ const style = StyleSheet.create({
     padding: 20,
     fontSize: 15,
     marginTop: 5,
-  }
+  },
 });
 
 const cardStyle = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#ecf0f1',
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#ecf0f1",
   },
   paragraph: {
     margin: 24,
     fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#34495e',
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#34495e",
   },
 });
 

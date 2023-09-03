@@ -2,14 +2,8 @@ import React from "react";
 import { colors } from "../../theme";
 import Background from "../background";
 import ScreenWrapper from "../../components/screenWrapper";
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const history = [
   {
@@ -69,20 +63,15 @@ const LocationHistoryScreen = (props) => {
       <ScreenWrapper style={container}>
         <Text style={title}>Location History</Text>
         <ScrollView style={styles.scrollView}>
-          <FlatList
-            data={history}
-            keyExtractor={(item) => item.id.toString()}
-            showsVerticalScrollIndicator={false}
-            renderItem={({ item }) => (
-              <TouchableOpacity style={card} onPress={() => {}}>
-                <View>
-                  <Text style={animalName}>{item.animalName}</Text>
-                  <Text style={distance}>{item.distance}</Text>
-                  <Text style={time}>{item.time}</Text>
-                </View>
-              </TouchableOpacity>
-            )}
-          />
+          {history.map((item) => (
+            <TouchableOpacity style={card} key={item.id} onPress={() => {}}>
+              <View>
+                <Text style={animalName}>{item.animalName}</Text>
+                <Text style={distance}>{item.distance}</Text>
+                <Text style={time}>{item.time}</Text>
+              </View>
+            </TouchableOpacity>
+          ))}
         </ScrollView>
       </ScreenWrapper>
     </Background>

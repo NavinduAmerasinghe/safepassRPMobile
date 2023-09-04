@@ -26,6 +26,7 @@ import HomeScreen from "./screen/HomeScreen/HomeScreen";
 // import UserLocation from "./screen/Location/UserLocation";
 import * as Notifications from "expo-notifications";
 import UserLocation from "./screen/Location/UserLocation";
+import { MyContextProvider } from "./screen/Context/MyContext";
 
 LogBox.ignoreLogs(["Warning: ..."]); // Ignore log notification by message
 LogBox.ignoreAllLogs();
@@ -48,6 +49,7 @@ const App = () => {
   });
 
   return (
+    <MyContextProvider>
     <NavigationContainer>
       <Stack.Navigator
         // initialRouteName="HomeScreen"
@@ -67,6 +69,8 @@ const App = () => {
         {/* <Stack.Screen name="UserLocation" component={UserLocation}/> */}
       </Stack.Navigator>
     </NavigationContainer>
+    </MyContextProvider>
+    
   );
 };
 

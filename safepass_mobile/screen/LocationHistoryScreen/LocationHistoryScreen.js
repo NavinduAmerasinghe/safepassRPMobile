@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { colors } from "../../theme";
 import Background from "../background";
 import ScreenWrapper from "../../components/screenWrapper";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { MyContext } from "../Context/MyContext";
 
 const history = [
   {
@@ -58,17 +59,20 @@ const history = [
 
 const LocationHistoryScreen = (props) => {
   const { container, title, card, animalName, distance, time } = styles;
+
+  const {data} = useContext(MyContext)
   return (
     <Background>
       <ScreenWrapper style={container}>
         <Text style={title}>Location History</Text>
+        <Text>{data.length}</Text>
         <ScrollView style={styles.scrollView}>
-          {history.map((item) => (
-            <TouchableOpacity style={card} key={item.id} onPress={() => {}}>
+          {data.map((data,index) => (
+            <TouchableOpacity style={card} key={index} onPress={() => {}}>
               <View>
-                <Text style={animalName}>{item.animalName}</Text>
-                <Text style={distance}>{item.distance}</Text>
-                <Text style={time}>{item.time}</Text>
+                <Text style={animalName}>{data.animalName}</Text>
+                <Text style={distance}>{data.distance}</Text>
+                <Text style={time}>{data.time.slice(11, 19)}</Text>
               </View>
             </TouchableOpacity>
           ))}

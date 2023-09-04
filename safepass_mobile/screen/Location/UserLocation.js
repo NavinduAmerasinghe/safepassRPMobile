@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import {
   View,
   Text,
@@ -17,13 +17,19 @@ import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import * as BackgroundFetch from "expo-background-fetch";
 import { BASE_URL } from "@env";
+import { MyContext } from "../Context/MyContext";
+import EventEmitter from 'events';
+
+const eventEmitter = new EventEmitter();
 
 const LOCATION_TRACKING = "location-trackingg";
 var l1;
 var l2;
 var displayAnimalName = [];
 
+
 const base_url = process.env.BASE_URL;
+
 TaskManager.defineTask(LOCATION_TRACKING, async ({ data, error }) => {
   if (error) {
     console.log("LOCATION_TRACKING task ERROR:", error);
@@ -59,6 +65,7 @@ TaskManager.defineTask(LOCATION_TRACKING, async ({ data, error }) => {
       ) {
         //console.log(resultData.status);
         if (resultData.status === "Warning") {
+          eventEmitter.emit('updateContext', resultData.data.newObservation[index]);
           schedulePushNotification(
             resultData.data.newObservation[index].animalName
           );
@@ -100,6 +107,8 @@ function UserLocation() {
   const [notification, setNotification] = useState(false);
   const notificationListener = useRef();
   const responseListener = useRef();
+
+  const {addDataItem} = useContext(MyContext)
 
   const startLocationTracking = async () => {
     await Location.startLocationUpdatesAsync(LOCATION_TRACKING, {
@@ -186,6 +195,18 @@ function UserLocation() {
         notificationListener.current
       );
       Notifications.removeNotificationSubscription(responseListener.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    // Listen for the event and update the context when it's received
+    const updateContextListener = eventEmitter.on('updateContext', (animalName) => {
+      addDataItem(animalName)
+    });
+
+    return () => {
+      // Remove the listener when the component unmounts
+      updateContextListener.removeListener('updateContext');
     };
   }, []);
 

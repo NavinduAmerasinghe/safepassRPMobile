@@ -550,10 +550,10 @@ exports.getObservationsforLocation = async (req, res, next) => {
         dis = distance(lat,long,locations[i].lat,locations[i].long,"K")
         //console.log(dis);
         if(dis<25){
-          //console.log(observations[i]);
           const newObject=new Object();
           newObject["animalName"] = observations[i].animalName
           newObject["distance"] = dis
+          newObject["time"] = new Date();
           newObservation.push(newObject)
         }
       }
